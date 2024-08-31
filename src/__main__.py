@@ -11,6 +11,7 @@ from src.handlers import (
     menu
 )
 
+
 async def register_handlers(dp: aiogram.Dispatcher) -> None:
     dp.include_router(menu.router)
 
