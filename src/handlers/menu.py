@@ -17,12 +17,10 @@ class FSMSuperUserPanel(StatesGroup):
 router = Router()
 
 @router.message(Command("start"))
-async def start(query: types.CallbackQuery) -> None:
-    db = await Database.setup()
+async def start(message: types.Message) -> None:
     await message.delete()
-    await query.message.edit_text(
-        "123 ⬇️", reply_markup=await user_kb()
-    )
+    await message.answer(text="Нажміть на кнопку", reply_markup = user_kb())
+    await state.clear()
     
     
     
@@ -39,8 +37,16 @@ async def add_student(query: types.CallbackQuery, state: FSMContext):
 async def add_student2(message: types.Message, state: FSMContext):
     db = await Database.setup()
     user_message = message.text
+    donate = 0
 
-    await db.add_student_group(user_message)
+    await db.add_student_group(name_member = user_message, donate = donate)
 
     await message.answer("Група додана ✅", reply_markup=None)
     await state.clear()
+    
+    
+@router.message(Command("list"))
+async def start(message: types.Message) -> None:
+    await message.delete()
+    await message.answer(text="Нажміть на кнопку", reply_markup = await selection_student_kb())
+    await State.clear()

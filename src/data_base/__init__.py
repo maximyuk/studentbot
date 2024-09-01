@@ -4,11 +4,13 @@ import aiosqlite
 import asyncache
 
 from src.data_base.adds import AddDB
+from src.data_base.selects import SelectDB
 
 
 
 
-class Database(AddDB):
+
+class Database(AddDB, SelectDB):
     @classmethod
     @asyncache.cached({})
     async def setup(cls):
