@@ -26,7 +26,7 @@ class Database(AddDB):
             """
             CREATE TABLE IF NOT EXISTS student_list(
                 id         INTEGER PRIMARY KEY,
-                name_command TEXT NOT NULL,
+                name_member TEXT NOT NULL,
                 donate INTEGER DEFAULT 0
             )
             """
