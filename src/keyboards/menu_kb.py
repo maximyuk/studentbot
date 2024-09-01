@@ -12,12 +12,12 @@ from src.data_base import Database
 def user_kb() -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
 
-    keyboard = ["Додати 👥", "Видалити 👥", "⬅️ Назад", "Сховати ❌"]
+    keyboard = ["Додати команду👥"]
 
     for button in keyboard:
         builder.add(InlineKeyboardButton(text=button, callback_data=button))
 
-    return builder.adjust(2).as_markup(resize_keyboard=True)
+    return builder.adjust(1).as_markup(resize_keyboard=True)
 
 
 
@@ -30,6 +30,6 @@ async def selection_student_kb() -> InlineKeyboardMarkup:
         name_member = student  
         builder.add(InlineKeyboardButton(text=name_member, callback_data=name_member))
 
-    return builder.adjust(4).as_markup()
+    return builder.adjust(2).as_markup()
 
     

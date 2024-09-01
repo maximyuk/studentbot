@@ -27,7 +27,8 @@ class Database(AddDB, SelectDB):
         await base.execute(
             """
             CREATE TABLE IF NOT EXISTS student_list(
-                id         INTEGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY,
+                name_command TEXT NOT NULL,
                 name_member TEXT NOT NULL,
                 donate INTEGER DEFAULT 0
             )

@@ -20,15 +20,15 @@ router = Router()
 async def start(message: types.Message) -> None:
     await message.delete()
     await message.answer(text="Нажміть на кнопку", reply_markup = user_kb())
-    await state.clear()
+
     
     
     
     
-@router.callback_query(F.data == "Додати 👥")
+@router.callback_query(F.data == "Додати команду👥")
 async def add_student(query: types.CallbackQuery, state: FSMContext):
     await query.message.edit_text(
-        "Введіть прізвише та ім'я учасника ⬇️", reply_markup=None
+        "Введіть назву команди ⬇️", reply_markup=None
     )
     await state.set_state(FSMSuperUserPanel.add_member_name)
 
@@ -38,15 +38,16 @@ async def add_student2(message: types.Message, state: FSMContext):
     db = await Database.setup()
     user_message = message.text
     donate = 0
+    name_member = "Null"
 
-    await db.add_student_group(name_member = user_message, donate = donate)
 
-    await message.answer("Група додана ✅", reply_markup=None)
+    await db.add_student_group(name_command = user_message,name_member=name_member , donate = donate)
+
+    await message.answer("Команда додана додана ✅", reply_markup=None)
     await state.clear()
     
     
 @router.message(Command("list"))
 async def start(message: types.Message) -> None:
     await message.delete()
-    await message.answer(text="Нажміть на кнопку", reply_markup = await selection_student_kb())
-    await State.clear()
+    await message.answer(text="Нажміть на кнопку з якої команди учасник на якого ви хочете поставити ❗", reply_markup = await selection_student_kb())
